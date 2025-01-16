@@ -1,7 +1,27 @@
 {
   "files": [],
+  "compilerOptions": {
+    "jsx": "react",
+    "allowImportingTsExtensions": true,
+    "esModuleInterop": true,
+    "allowJs": true,
+    "moduleResolution": "node",
+    "skipLibCheck": true,
+    "allowSyntheticDefaultImports": true,
+    "declaration": true,
+    "skipDefaultLibCheck": true,
+    "emitDeclarationOnly": true,
+    "baseUrl": "./",
+    "paths": {
+      "antd": ["node_modules/antd"]
+    }
+  },
   "references": [
-    { "path": "./tsconfig.app.json" },
-    { "path": "./tsconfig.node.json" }
+    {
+      "path": "./tsconfig.app.json"
+    },
+    {
+      "path": "./tsconfig.node.json"
+    }
   ]
 }

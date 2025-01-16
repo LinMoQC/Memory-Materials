@@ -1,6 +1,6 @@
 {
   "name": "memory-library",
-  "version": "1.2.1",
+  "version": "1.2.5",
   "type": "module",
   "main": "dist/lib/index.cjs.js",
   "module": "dist/es/index.esm.js",
@@ -40,7 +40,6 @@
     "@rollup/plugin-node-resolve": "^16.0.0",
     "@rollup/plugin-terser": "^0.4.4",
     "@rollup/plugin-typescript": "^12.1.2",
-    "@types/antd": "^1.0.4",
     "@types/react": "^18.3.18",
     "@types/react-dom": "^18.3.5",
     "@vitejs/plugin-react": "^4.3.4",

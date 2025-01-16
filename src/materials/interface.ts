@@ -78,3 +78,29 @@ export interface ComponentSetter {
     type: string;
     [key: string]: any;
 }
+
+import { ButtonConfig } from "./Button/config";
+import { ContainerConfig } from "./Container/config";
+import { FlexContainerConfig } from "./FlexContainer/config";
+import { FlexItemConfig } from "./FlexItem/config";
+import { FormConfig } from "./Form/config";
+import { FormItemConfig } from "./FormItem/config";
+import { InputConfig } from "./Input/config";
+import { ModalConfig } from "./Modal/config";
+import { PageConfig } from "./Page/config";
+import { TableConfig } from "./Table/config";
+import { TableColumnConfig } from "./TableColumn/config";
+
+export const MaterialConfigs: Record<string, ComponentConfig> = {
+    Container: ContainerConfig,
+    Button: ButtonConfig,
+    Page: PageConfig,
+    Modal: ModalConfig,
+    Table: TableConfig,
+    TableColumn: TableColumnConfig,
+    Form: FormConfig,
+    FormItem: FormItemConfig,
+    FlexContainer: FlexContainerConfig,
+    FlexItem: FlexItemConfig,
+    Input: InputConfig
+} as const;

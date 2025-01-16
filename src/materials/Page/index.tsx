@@ -1,4 +1,5 @@
 import { CommonComponentProps } from "../interface";
+import React from "react";
 
 
 function Page({ id, name, children, styles }: CommonComponentProps) {

@@ -1,5 +1,6 @@
 import { Button as AntdButton } from 'antd';
 import { CommonComponentProps } from '../interface';
+import React from 'react';
 
 export interface ButtonProps extends CommonComponentProps {
 

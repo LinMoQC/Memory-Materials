@@ -1,6 +1,6 @@
 import React from "react";
 import { ActionType, Component } from "./interface";
-import { MaterialConfigs } from ".";
+import { MaterialConfigs } from "./interface";
 import { message } from "antd";
 
 function handleEvent(component: Component, componentRefs: React.MutableRefObject<Record<string, any>>) {

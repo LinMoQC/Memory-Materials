@@ -17,7 +17,7 @@ const FormItem: ForwardRefRenderFunction<FormRef, FormItemProps> = ({ children, 
     useImperativeHandle(ref, () => {
         return {
             submit: () => {
-                form.submit();
+                (form as any).submit();
             }
         }
     }, [form]);

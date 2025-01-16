@@ -34,34 +34,8 @@ export type { FormRef as FormProps } from './Form'
 export type { TableProps } from './Table'
 export type { TableColumnProps } from './TableColumn'
 
-// 物料配置文件导出
-import { ButtonConfig } from "./Button/config";
-import { ContainerConfig } from "./Container/config";
-import { FlexContainerConfig } from "./FlexContainer/config";
-import { FlexItemConfig } from "./FlexItem/config";
-import { FormConfig } from "./Form/config";
-import { FormItemConfig } from "./FormItem/config";
-import { InputConfig } from "./Input/config";
-import { ModalConfig } from "./Modal/config";
-import { PageConfig } from "./Page/config";
-import { TableConfig } from "./Table/config";
-import { TableColumnConfig } from "./TableColumn/config";
-import { ComponentConfig } from "./interface";
-
-export const MaterialConfigs: Record<string, ComponentConfig> = {
-    Container: ContainerConfig,
-    Button: ButtonConfig,
-    Page: PageConfig,
-    Modal: ModalConfig,
-    Table: TableConfig,
-    TableColumn: TableColumnConfig,
-    Form: FormConfig,
-    FormItem: FormItemConfig,
-    FlexContainer: FlexContainerConfig,
-    FlexItem: FlexItemConfig,
-    Input: InputConfig
-} as const;
-
 // 渲染
 import { renderComponents } from "./render";
-export { renderComponents }
+// 物料配置文件
+import { MaterialConfigs } from "./interface";
+export { MaterialConfigs, renderComponents }

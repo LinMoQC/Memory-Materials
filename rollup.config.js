@@ -1,99 +1,84 @@
 import typescript from 'rollup-plugin-typescript2';
-import postcss from 'rollup-plugin-postcss' //提取组件css文件
-import fs from 'fs'
-import path from 'path'
-import dts from 'rollup-plugin-dts' //生成组件的index.d.ts文件
-import alias from '@rollup/plugin-alias'
-import image from '@rollup/plugin-image'
-import {
-    babel
-} from '@rollup/plugin-babel'
+import postcss from 'rollup-plugin-postcss';
+import fs from 'fs';
+import path from 'path';
+import dts from 'rollup-plugin-dts';
+import image from '@rollup/plugin-image';
+import { babel } from '@rollup/plugin-babel';
+import { defineConfig } from 'rollup';
 
 // 递归扫描目录，获取所有文件
 function getAllFiles(srcpath) {
-    const files = []
+    const files = [];
     const scanDir = dir => {
-        const filesInDir = fs.readdirSync(dir)
+        const filesInDir = fs.readdirSync(dir);
         filesInDir.forEach(file => {
-            const filePath = path.join(dir, file)
+            const filePath = path.join(dir, file);
             if (fs.statSync(filePath).isDirectory()) {
-                scanDir(filePath)
+                scanDir(filePath);
             } else {
-                files.push(filePath)
+                files.push(filePath);
             }
-        })
-    }
-    scanDir(srcpath)
-    return files
+        });
+    };
+    scanDir(srcpath);
+    return files;
 }
 
-
-
-const getEntryConfig = (scanDir = './src', ignoreFileDir = ['business']) => {
-    let entryPoints = {}
+const getEntryConfig = (scanDir = './src/materials', ignoreFileDir = ['business']) => {
+    let entryPoints = {};
     getAllFiles(scanDir).forEach(filePath => {
-        const ext = path.extname(filePath).toLowerCase()
-        const [, dirName] = filePath.split('/')
+        const ext = path.extname(filePath).toLowerCase();
+        const [, dirName] = filePath.split('/');
 
         if (ignoreFileDir.includes(dirName)) {
-            console.warn('entryPoints', entryPoints, dirName, filePath)
-
-            return
+            console.warn('Ignoring directory:', dirName, filePath);
+            return;
         }
-        const basename = path.basename(filePath)
-        const relativePath = path.relative('./src', filePath)
-        if (fs.statSync(filePath).isDirectory()) {
-            return
-        } else {
-            const [fileName] = basename.split('.')
-
+        const basename = path.basename(filePath);
+        const relativePath = path.relative('./src/materials', filePath);
+        if (!fs.statSync(filePath).isDirectory()) {
+            const [fileName] = basename.split('.');
             if (fileName === 'index' && ['.tsx', '.js', '.ts'].includes(ext)) {
-                const entryName = relativePath.replace(/\.(tsx|ts|js)$/, '')
-                entryPoints[entryName] = filePath
+                const entryName = relativePath.replace(/\.(tsx|ts|js)$/, '');
+                entryPoints[entryName] = filePath;
             }
         }
-    })
+    });
+    return entryPoints;
+};
 
-    return entryPoints
-}
-
-const getCommonConfig = ({
-    inputKey,
-    plugins = [],
-    format = 'ems'
-}) => {
-    const dir = format === 'esm' ? 'esm' : 'lib'
-
-    const commonConfig = {
-        external: ['react', 'react-dom', 'antd', 'react/jsx-runtime'],
+const getCommonConfig = ({ inputKey, plugins = [], format = 'esm' }) => {
+    const dir = format === 'esm' ? 'esm' : 'lib';
+    return {
+        external: [
+            'react',
+            'react-dom',
+            'antd',
+            'dayjs',
+            'react/jsx-runtime',
+            '@babel/runtime/helpers/defineProperty',
+            '@babel/runtime/helpers/asyncToGenerator',
+            '@babel/runtime/helpers/slicedToArray',
+            '@babel/runtime/regenerator',
+            '@babel/runtime/helpers/objectWithoutProperties'
+        ],
         plugins: [
-            // alias({
-            //     entries: [
-            //         {
-            //             find: '@',
-            //             replacement: path.resolve('./src/')
-            //         },
-            //     ]
-            // }),
             image(),
             typescript({
                 tsconfig: './tsconfig.build.json',
                 useTsconfigDeclarationDir: true,
-                check: false, // 禁用类型检查
+                check: false,
             }),
             postcss({
-                // modules: true,
-                // extract: true,
                 extract: `${dir}/${inputKey}.css`,
             }),
             ...plugins,
         ],
-    }
-    return commonConfig
-}
+    };
+};
 
-const genlibConfig = (inputKey) => {
-
+const genLibConfig = (inputKey) => {
     const commonConfig = getCommonConfig({
         inputKey,
         format: 'lib',
@@ -113,13 +98,12 @@ const genlibConfig = (inputKey) => {
                             },
                         },
                     ],
-                    '@babel/preset-flow',
                     '@babel/preset-react'
                 ],
                 plugins: ['@babel/plugin-transform-runtime'],
             })
         ]
-    })
+    });
 
     return {
         input: entryPoints[inputKey],
@@ -130,20 +114,26 @@ const genlibConfig = (inputKey) => {
             globals: {
                 react: 'React',
                 'react-dom': 'ReactDOM',
+                '@babel/runtime/helpers/defineProperty': '_defineProperty',
+                'react/jsx-runtime': 'jsxRuntime',
+                antd: 'antd',
+                dayjs: 'dayjs',
+                '@babel/runtime/helpers/asyncToGenerator': '_asyncToGenerator',
+                '@babel/runtime/helpers/slicedToArray': '_slicedToArray',
+                '@babel/runtime/regenerator': '_regeneratorRuntime',
+                '@babel/runtime/helpers/objectWithoutProperties': '_objectWithoutProperties'
             },
             dir: 'dist',
         },
         ...commonConfig,
-    }
-
-}
+    };
+};
 
 const genEsmConfig = (inputKey) => {
-
     const commonConfig = getCommonConfig({
         inputKey,
         format: 'esm',
-    })
+    });
     return {
         input: entryPoints[inputKey],
         output: {
@@ -152,18 +142,26 @@ const genEsmConfig = (inputKey) => {
             globals: {
                 react: 'React',
                 'react-dom': 'ReactDOM',
+                '@babel/runtime/helpers/defineProperty': '_defineProperty',
+                'react/jsx-runtime': 'jsxRuntime',
+                antd: 'antd',
+                dayjs: 'dayjs',
+                '@babel/runtime/helpers/asyncToGenerator': '_asyncToGenerator',
+                '@babel/runtime/helpers/slicedToArray': '_slicedToArray',
+                '@babel/runtime/regenerator': '_regeneratorRuntime',
+                '@babel/runtime/helpers/objectWithoutProperties': '_objectWithoutProperties'
             },
             dir: 'dist',
         },
         ...commonConfig,
-    }
-
-}
+    };
+};
 
 const genDtsConfig = (inputKey) => {
-    const config = {
+    return {
         input: entryPoints[inputKey],
-        output: [{
+        output: [
+            {
                 format: 'es',
                 entryFileNames: `lib/${inputKey}.d.ts`,
                 dir: 'dist',
@@ -174,50 +172,57 @@ const genDtsConfig = (inputKey) => {
                 dir: 'dist',
             }
         ],
-        external: ['react', 'react-dom', 'antd'], // 告诉 Rollup 将 React 视为外部依赖
+        external: ['react', 'react-dom', 'antd', 'dayjs', 'react/jsx-runtime', '@babel/runtime/helpers/defineProperty'],
         plugins: [
+            // resolve(),
             dts(),
-            // image(),
-            alias({
-                entries: [{
-                    find: '@',
-                    replacement: path.resolve('./src/')
-                }, ]
-            }),
-            // typescript(),
-            // postcss({
-            //   modules: true,
-            //   extract: `esm/${inputKey}.css`,
-            // }),
+            // babel({
+            //     babelHelpers: 'bundled',
+            //     presets: ['@babel/preset-react', '@babel/preset-typescript'],
+            //     extensions: ['.js', '.jsx', '.ts', '.tsx'],
+            // })
         ],
-    }
-    return config
-}
+    };
+};
 
 function deleteDistDirectory() {
-    const distPath = path.join(process.cwd(), 'dist')
+    const distPath = path.join(process.cwd(), 'dist');
     if (fs.existsSync(distPath)) {
-        console.log('"dist" 目录开始删除')
-
-        fs.rmSync(distPath, {
-            recursive: true
-        })
-        console.log('"dist" 目录已删除')
+        console.log('"dist" directory is being deleted');
+        fs.rmSync(distPath, { recursive: true });
+        console.log('"dist" directory has been deleted');
     } else {
-        console.log('当前目录下不存在 "dist" 目录')
+        console.log('"dist" directory does not exist');
     }
-
 }
-deleteDistDirectory()
-const entryPoints = getEntryConfig()
+
+deleteDistDirectory();
+const entryPoints = getEntryConfig();
 
 const outputs = Object.keys(entryPoints).flatMap((inputKey) => {
     return [
-        // genlibConfig(inputKey),
-        // genEsmConfig(inputKey),
+        genLibConfig(inputKey),
+        genEsmConfig(inputKey),
         genDtsConfig(inputKey),
+    ];
+}).filter(Boolean);
+
+let buildCount = 0;
+const totalBuilds = outputs.length + 12;
+
+
+export default defineConfig(outputs.map(config => ({
+    ...config,
+    plugins: [
+        ...(config.plugins || []),
+        {
+            name: 'build-success-plugin',
+            writeBundle() {
+                buildCount += 1;
+                if (buildCount === totalBuilds) {
+                    console.log('🎉🎉🎉 所有打包任务完成');
+                }
+            }
+        }
     ]
-}).filter(Boolean)
-
-
-export default outputs
+})));

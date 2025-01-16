@@ -12,14 +12,13 @@
         "resolveJsonModule": true,
         "allowSyntheticDefaultImports": true,
         "declaration": true,
-        "declarationDir": "./dist/es/types",
         "sourceMap": true,
         "skipDefaultLibCheck": true,
         "allowImportingTsExtensions": true,
         "emitDeclarationOnly": false,
     },
     "include": [
-        "src/materials/**/*" // 包含所有 .ts, .tsx, .js, .jsx 文件
+        "src/materials/**/*" 
     ],
     "exclude": [
         "node_modules",

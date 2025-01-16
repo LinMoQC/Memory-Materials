@@ -24,8 +24,9 @@ const Form = forwardRef<FormRef, FormItemProps>(({ children, onFinish }, ref) =>
 
     // 提供给父组件的 ref 方法
     useImperativeHandle(ref, () => ({
-        submit: form.submit,
+        submit: (form as any).submit,
     }), [form]);
+    
 
     // 渲染子组件
     const formItems = useMemo(() => {
