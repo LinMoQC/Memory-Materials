@@ -1,0 +1,28 @@
+{
+    "compilerOptions": {
+        "jsx": "react-jsx",
+        "allowJs": true,
+        "baseUrl": "./src",
+        "target": "ESNext",
+        "module": "ESNext",
+        "moduleResolution": "node",
+        "strict": true,
+        "esModuleInterop": true,
+        "skipLibCheck": true,
+        "resolveJsonModule": true,
+        "allowSyntheticDefaultImports": true,
+        "declaration": true,
+        "declarationDir": "./dist/es/types",
+        "sourceMap": true,
+        "skipDefaultLibCheck": true,
+        "allowImportingTsExtensions": true,
+        "emitDeclarationOnly": false,
+    },
+    "include": [
+        "src/materials/**/*" // 包含所有 .ts, .tsx, .js, .jsx 文件
+    ],
+    "exclude": [
+        "node_modules",
+        "dist"
+    ]
+}
