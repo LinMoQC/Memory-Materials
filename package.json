@@ -7,6 +7,12 @@
   "types": "dist/es/types/index.d.ts",
   "description": "Memory LowCode Materials",
   "author": "LinMoQC",
+  "release": {
+    "branches": [
+      "master",
+      "main"
+    ]
+  },
   "repository": "https://github.com/LinMoQC/Memory-Materials",
   "exports": {
     "import": "./dist/esm/index.js",
