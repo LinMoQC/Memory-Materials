@@ -1,0 +1,40 @@
+.flexItem {
+    min-height: 200px;
+    padding: 20px;
+    position: relative;
+    border: dashed;
+    background-color: rgba(10, 19, 37, 0.05);
+    transition: all 0.1s ease-in-out;
+
+    &.empty {
+        border: dashed;
+        background-color: rgba(10, 19, 37, 0.05);
+    }
+
+    &.filled {
+        background-color: transparent;
+        border: 0;
+    }
+
+    &.can-drop {
+        border: 2px solid blue;
+    }
+
+    &.default-border {
+        border: 2px solid #ced0d3;
+    }
+}
+
+.text {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    color: #b8babf;
+}
+
+.flexItemProd{
+    min-height: 200px;
+    padding: 20px;
+    position: relative;
+}

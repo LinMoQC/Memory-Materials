@@ -1,0 +1,43 @@
+// 定义常用的样式变量
+$border-color-empty: rgba(10, 19, 37, 0.05);
+$border-color-default: #ced0d3;
+$border-color-active: blue;
+$text-color: #b8babf;
+$min-height: 100px;
+$padding: 20px;
+
+.container {
+  min-height: $min-height;
+  padding: $padding;
+  position: relative;
+  
+  // 空内容时的样式
+  &.empty {
+    border: 2px dashed $border-color-default;
+    background-color: $border-color-empty;
+  }
+
+  // 非空内容时的样式
+  &.filled {
+    background-color: transparent;
+    border: 0;
+  }
+
+  // 拖拽可放置时的样式
+  &.can-drop {
+    border: 2px solid $border-color-active;
+  }
+
+  // 默认样式
+  &.default-border {
+    border: 2px solid $border-color-default;
+  }
+
+  .text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: $text-color;
+  }
+}

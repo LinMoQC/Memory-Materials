@@ -1,15 +1,15 @@
-import { useImperativeHandle, useState, forwardRef } from "react";
+import { useImperativeHandle, useState } from "react";
 import { Modal as AntdModal } from 'antd';
-import { CommonComponentProps } from "../interface";
 import React from "react";
+import { ModalProps } from "./config";
 
 export interface ModalRef {
     open: () => void;
     close: () => void;
 }
 
-const Modal = forwardRef<ModalRef, CommonComponentProps>(({ children, title, onOk, onCancel, styles }, ref) => {
-    const [open, setOpen] = useState(false); // 默认状态为关闭
+const Modal = React.forwardRef<ModalRef, ModalProps>(({ children, title, onOk, onCancel, styles }, ref) => {
+    const [open, setOpen] = useState(false);
 
     useImperativeHandle(ref, () => ({
         open: () => {

@@ -1,50 +1,34 @@
-# React + TypeScript + Vite
+# Memory Materials
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+[中文版](./README.zh-CN.md)
 
-Currently, two official plugins are available:
+Memory Materials is the material library for **Memory LowCodeEditor**. This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Rollup Multi-Entry Bundling Configuration for Memory Materials
 
-## Expanding the ESLint configuration
+This configuration sets up Rollup for bundling the `Memory Materials` library with multiple entry points, supporting both UMD and ESM output formats. It also handles TypeScript, CSS, images, and generates TypeScript declaration files.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+### Key Features
 
-- Configure the top-level `parserOptions` property like this:
+1. **Multi-Entry Bundling**: 
+   - Recursively scans the `./src/materials` directory to gather all potential entry files (e.g., `index.tsx`, `index.ts`, `index.js`).
+   - Excludes specified directories (e.g., `business`).
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+2. **Output Formats**:
+   - **UMD**: For general usage in both browsers and Node.js environments.
+   - **ESM**: For modern browsers and build tools.
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+3. **Common Configurations**:
+   - Uses **TypeScript** plugin for transpiling `.tsx` and `.ts` files.
+   - **PostCSS** plugin for handling Sass and autoprefixing.
+   - **Babel** plugin for older browser support (e.g., IE11).
+   - **Image Plugin** to handle image imports.
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+4. **TypeScript Declaration Files**:
+   - Generates `.d.ts` files for TypeScript consumers.
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+5. **Clean Build Directory**:
+   - Automatically deletes the `dist` directory before starting the build to ensure a clean output.
+
+6. **Build Completion Logging**:
+   - Tracks when all build tasks are completed and logs a success message.

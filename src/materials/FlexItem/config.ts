@@ -1,7 +1,12 @@
-import { ComponentConfig } from '../interface';
+import { CommonMaterialProps, MaterialConfig } from '../interface';
 import FlexItemProd from './index'
+import FlexItemDev from './dev'
 
-export const FlexItemConfig: ComponentConfig = {
+export interface FlexItemProps extends CommonMaterialProps {
+    flexRatio: number
+}
+
+export const FlexItemConfig: MaterialConfig = {
     name: "FlexItem",
     defaultProps: {
         flexRatio: 1
@@ -15,6 +20,7 @@ export const FlexItemConfig: ComponentConfig = {
     ],
     desc: "弹性容器项",
     stylesSetter: [],
+    dev: FlexItemDev,
     prod: FlexItemProd,
     events: [],
     methods: [],

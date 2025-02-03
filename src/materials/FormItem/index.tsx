@@ -1,17 +1,9 @@
 import React, { ForwardRefRenderFunction, useImperativeHandle, useMemo } from "react";
 import { Form as AntdForm, DatePicker, Input } from 'antd';
 import dayjs from "dayjs";
-import { CommonComponentProps } from "../interface";
+import { FormItemProps, FormItemRef } from "./config";
 
-interface FormItemProps extends CommonComponentProps {
-    onFinish: (value: any) => void
-}
-
-export interface FormRef {
-    submit: () => void
-}
-
-const FormItem: ForwardRefRenderFunction<FormRef, FormItemProps> = ({ children, onFinish }, ref) => {
+const FormItem: ForwardRefRenderFunction<FormItemRef, FormItemProps> = ({ children, onFinish }, ref) => {
     const [form] = AntdForm.useForm();
 
     useImperativeHandle(ref, () => {
@@ -41,7 +33,7 @@ const FormItem: ForwardRefRenderFunction<FormRef, FormItemProps> = ({ children, 
             }
         })
 
-        onFinish(values);
+        if(onFinish) onFinish(values);
     }
 
     return <AntdForm name='form' labelCol={{ span: 2 }} wrapperCol={{ span: 18 }} form={form} onFinish={save}>

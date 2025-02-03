@@ -16,9 +16,15 @@
         "skipDefaultLibCheck": true,
         "allowImportingTsExtensions": true,
         "emitDeclarationOnly": false,
+        "paths": {
+            "antd": [
+                "node_modules/antd"
+            ],
+        }
     },
     "include": [
-        "src/materials/**/*" 
+        "src/materials/**/*",
+        "global.d.ts"
     ],
     "exclude": [
         "node_modules",

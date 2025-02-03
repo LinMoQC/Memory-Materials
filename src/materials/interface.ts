@@ -1,6 +1,10 @@
+/*
+    Material与Component可以理解为类与对象，Component是一种Material的实例化
+*/
+
 import { CSSProperties, PropsWithChildren } from "react";
 
-export interface CommonComponentProps extends PropsWithChildren {
+export interface CommonMaterialProps extends PropsWithChildren {
     id: string;
     name: string;
     [key: string]: any;
@@ -46,12 +50,13 @@ export interface ComponentMethodConfig {
     }
 }
 
-export interface ComponentConfig {
+export interface MaterialConfig {
     name: string;
     defaultProps: Record<string, any>;
     setter?: ComponentSetter[];
     desc: string;
     stylesSetter?: ComponentSetter[];
+    dev: any;
     prod: any;
     events?: ComponentEvent[];
     methods?: ComponentMethod[];
@@ -69,15 +74,15 @@ export interface ComponentMethod {
     label: string
 }
 
-// 物料类型
-export type MaterialType = 'unit' | 'area' | 'special'
-
 export interface ComponentSetter {
     name: string;
     label: string;
     type: string;
     [key: string]: any;
 }
+
+// 物料类型
+export type MaterialType = 'unit' | 'area' | 'special'
 
 import { ButtonConfig } from "./Button/config";
 import { ContainerConfig } from "./Container/config";
@@ -91,7 +96,7 @@ import { PageConfig } from "./Page/config";
 import { TableConfig } from "./Table/config";
 import { TableColumnConfig } from "./TableColumn/config";
 
-export const MaterialConfigs: Record<string, ComponentConfig> = {
+export const MaterialConfigs: Record<string, MaterialConfig> = {
     Container: ContainerConfig,
     Button: ButtonConfig,
     Page: PageConfig,

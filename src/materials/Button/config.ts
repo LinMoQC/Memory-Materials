@@ -1,7 +1,15 @@
-import { ComponentConfig } from "../interface";
+import { CommonMaterialProps, MaterialConfig } from "../interface";
 import * as ButtonProd from './index'
+import * as ButtonDev from './dev'
 
-export const ButtonConfig: ComponentConfig = {
+type ButtonSize = 'small' | 'middle' | 'large'
+
+export interface ButtonProps extends CommonMaterialProps {
+    danger?: boolean, 
+    size?: ButtonSize, 
+}
+
+export const ButtonConfig: MaterialConfig = {
     name: 'Button',
     defaultProps: {
         type: 'primary',
@@ -66,6 +74,7 @@ export const ButtonConfig: ComponentConfig = {
         }
     ],
     prod: ButtonProd,
+    dev: ButtonDev,
     desc: '按钮',
     materialType: 'unit'
 }

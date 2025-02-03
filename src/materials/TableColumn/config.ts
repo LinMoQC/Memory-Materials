@@ -1,7 +1,12 @@
-import { ComponentConfig } from "../interface";
+import { CommonMaterialProps, MaterialConfig } from "../interface";
 import TableColumnProd from "./index";
+import * as TableColumnDev from './dev'
 
-export const TableColumnConfig: ComponentConfig = {
+export interface TableColumnProps extends CommonMaterialProps {
+
+}
+
+export const TableColumnConfig: MaterialConfig = {
     name: 'TableColumn',
     desc: '表格列',
     defaultProps: {
@@ -35,6 +40,7 @@ export const TableColumnConfig: ComponentConfig = {
             type: 'input',
         },
     ],
+    dev: TableColumnDev,
     prod: TableColumnProd,
     materialType: 'unit'
 }

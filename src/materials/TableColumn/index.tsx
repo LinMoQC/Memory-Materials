@@ -1,7 +1,7 @@
 import React, { useMemo, useState } from "react";
 import { Table as AntdTable } from 'antd';
 import dayjs from "dayjs";
-import { CommonComponentProps } from "../interface";
+import { TableColumnProps } from "./config";
 
 const TestData = [
     { name: '光光', sex: '男', birthday: new Date('1994-07-07').getTime() },
@@ -9,12 +9,7 @@ const TestData = [
     { name: '小红', sex: '女', birthday: new Date('1996-08-08').getTime() }
 ]
 
-export interface TableColumnProps extends CommonComponentProps {
-
-}
-
 const TableColumn: React.FC<TableColumnProps> = (props) => {
-
     const {
         id,
         name,

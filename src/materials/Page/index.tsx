@@ -1,13 +1,13 @@
-import { CommonComponentProps } from "../interface";
 import React from "react";
+import { PageProps } from "./config";
+import styles from './index.module.scss'; 
 
-
-function Page({ id, name, children, styles }: CommonComponentProps) {
+const Page: React.FC<PageProps> = ({ id, name, children, styles: customStyles }: PageProps) => {
 
     return (
         <div
-            className='p-[20px]'
-            style={{ ...styles }}
+            className={styles.pageContainerProd}
+            style={{ ...customStyles }}
         >
             {children}
         </div>

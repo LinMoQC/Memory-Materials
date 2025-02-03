@@ -1,25 +1,9 @@
 import React, { forwardRef, useImperativeHandle, useMemo } from "react";
 import { Form as AntdForm, DatePicker, Input } from "antd";
 import dayjs from "dayjs";
-import { CommonComponentProps } from "../interface";
+import { FormItemComponentProps, FormProps, FormRef } from "./config";
 
-interface FormItemComponentProps {
-    label: string;
-    name: string;
-    type: "input" | "date";
-    rules?: "required" | null;
-}
-
-interface FormItemProps extends CommonComponentProps {
-    onFinish: (value: Record<string, any>) => void;
-    children: React.ReactElement<FormItemComponentProps>[];
-}
-
-export interface FormRef {
-    submit: () => void;
-}
-
-const Form = forwardRef<FormRef, FormItemProps>(({ children, onFinish }, ref) => {
+const Form = forwardRef<FormRef, FormProps>(({ children, onFinish }, ref) => {
     const [form] = AntdForm.useForm();
 
     // 提供给父组件的 ref 方法

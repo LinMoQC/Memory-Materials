@@ -1,12 +1,18 @@
-import { ComponentConfig } from '../interface';
+import { CommonMaterialProps, MaterialConfig } from '../interface';
 import InputProd from './index'
+import InputDev from './dev'
 
-export const InputConfig: ComponentConfig = {
+export interface InputProps extends CommonMaterialProps {
+    
+}
+
+export const InputConfig: MaterialConfig = {
     name: "Input",
     defaultProps: {},
     setter: [],
-    desc: "Input 组件描述",
+    desc: "输入框",
     stylesSetter: [],
+    dev: InputDev,
     prod: InputProd,
     events: [],
     methods: [],

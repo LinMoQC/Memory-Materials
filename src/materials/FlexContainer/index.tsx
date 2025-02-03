@@ -1,19 +1,13 @@
 import React from "react";
-import { CommonComponentProps } from "../interface";
-
-
-export interface FlexContainerProps extends CommonComponentProps {
-    
-}
+import { FlexContainerProps } from "./config";
+import styles from './index.module.scss'; 
 
 const FlexContainer: React.FC<FlexContainerProps> = (props) => {
-    const {styles,children} = props
+    const {styles: customStyles,children} = props
     return (
         <div
-            style={{ ...styles}}
-            className={
-                `min-h-[200px] p-[20px] relative flex items-center justify-between gap-8`
-            }
+            style={{ ...customStyles}}
+            className={styles.container}
         >
             {children}
         </div>

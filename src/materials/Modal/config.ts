@@ -1,7 +1,12 @@
-import { ComponentConfig } from "../interface";
+import { CommonMaterialProps, MaterialConfig } from "../interface";
 import ModalProd from "./index";
+import ModalDev from "./dev";
 
-export const  ModalConfig: ComponentConfig = {
+export interface ModalProps extends CommonMaterialProps {
+    
+}
+
+export const ModalConfig: MaterialConfig = {
     name: 'Modal',
     defaultProps: {
         title: '弹窗'
@@ -35,6 +40,7 @@ export const  ModalConfig: ComponentConfig = {
         }
     ],
     desc: '弹窗',
+    dev: ModalDev,
     prod: ModalProd,
     materialType: 'area'
 }

@@ -1,18 +1,13 @@
 import React from "react";
-import { CommonComponentProps } from "../interface";
-
-export interface FlexItemProps extends CommonComponentProps {
-    flexRatio: number
-}
+import { FlexItemProps } from "./config";
+import styles from './index.module.scss';
 
 const FlexItem: React.FC<FlexItemProps> = (props) => {
-    const { children, styles,flexRatio } = props
+    const { children, styles: customStyles,flexRatio } = props
     return (
         <div
-            style={{ ...styles,flex: `${flexRatio}`}}
-            className={
-                `min-h-[200px] p-[20px] relative`
-            }
+            style={{ ...customStyles,flex: `${flexRatio}`}}
+            className={styles.flexItemProd}
         >
             {children}
         </div>

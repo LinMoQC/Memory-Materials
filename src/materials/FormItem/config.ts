@@ -1,13 +1,24 @@
-import { ComponentConfig } from "../interface";
+import { CommonMaterialProps, MaterialConfig } from "../interface";
 import FormItemProd from "./index";
+import FormItemDev from "./dev";
 
-export const FormItemConfig: ComponentConfig = {
+export interface FormItemProps extends CommonMaterialProps {
+    onFinish?: (value: any) => void
+    label: string
+}
+
+export interface FormItemRef {
+    submit: () => void
+}
+
+export const FormItemConfig: MaterialConfig = {
     name: 'FormItem',
     desc: '表单项',
     defaultProps: {
         name: new Date().getTime(),
         label: '姓名'
     },
+    dev: FormItemDev,
     prod: FormItemProd,
     setter: [
         {

@@ -1,7 +1,7 @@
 import React from "react";
 import { InputProps } from "./config";
 
-const Input: React.FC<InputProps> = (props) => {
+const Input: React.FC<InputProps> = () => {
     return (
         <div>
             Input
