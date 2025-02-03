@@ -7,7 +7,7 @@
     transition: all 0.1s ease-in-out;
 
     &.empty {
-        border: dashed;
+        border: 2px dashed #ced0d3;
         background-color: rgba(10, 19, 37, 0.05);
     }
 
@@ -31,6 +31,7 @@
     top: 50%;
     transform: translate(-50%, -50%);
     color: #b8babf;
+    border: 2px dashed #ced0d3;
 }
 
 .flexItemProd{
