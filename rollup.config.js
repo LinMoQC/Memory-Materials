@@ -239,21 +239,9 @@ const outputs = Object.keys(entryPoints).flatMap((inputKey) => {
     ];
 }).filter(Boolean);
 
-let buildCount = 0;
-const totalBuilds = outputs.length + 12;
-
 export default defineConfig(outputs.map(config => ({
     ...config,
     plugins: [
         ...(config.plugins || []),
-        {
-            name: 'build-success-plugin',
-            writeBundle() {
-                buildCount += 1;
-                if (buildCount === totalBuilds) {
-                    console.log('🎉🎉🎉 所有打包任务完成');
-                }
-            }
-        }
     ]
 })));
