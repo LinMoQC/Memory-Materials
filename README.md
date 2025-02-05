@@ -13,7 +13,7 @@ npm i @cusmoedge/lowcode-materials
 ## 🚀 Development Documentation
 ### Install Memory CLI
 ``` javascript
-npm install @cusmoedge/memory-cli -g
+npm i @cusmoedge/memory-cli -g
 ```
 
 ### Generate Material Template
