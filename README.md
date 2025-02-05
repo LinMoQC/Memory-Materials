@@ -1,5 +1,7 @@
 # Memory Materials
 
+[中文](./README.zh-CN.md)
+
 ## 🌟 Introduction
 Memory Materials is the **material library** for **Memory LowCodeEditor**. This template provides a minimal setup to enable React to work with Vite, including HMR (Hot Module Replacement) and some ESLint rules.
    
