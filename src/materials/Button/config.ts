@@ -1,6 +1,6 @@
 import { CommonMaterialProps, MaterialConfig } from "../interface";
-import * as ButtonProd from './index'
-import * as ButtonDev from './dev'
+import ButtonProd from "./index";
+import ButtonDev from "./dev";
 
 type ButtonSize = 'small' | 'middle' | 'large'
 
