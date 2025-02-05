@@ -1,5 +1,7 @@
 # Memory Materials
 
+[中文](./README.zh-CN.md)
+
 ## 🌟 Introduction
 Memory Materials is the **material library** for **Memory LowCodeEditor**. This template provides a minimal setup to enable React to work with Vite, including HMR (Hot Module Replacement) and some ESLint rules.
    
@@ -11,7 +13,7 @@ npm i @cusmoedge/lowcode-materials
 ## 🚀 Development Documentation
 ### Install Memory CLI
 ``` javascript
-npm install @cusmoedge/memory-cli -g
+npm i @cusmoedge/memory-cli -g
 ```
 
 ### Generate Material Template
